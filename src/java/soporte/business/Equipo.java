@@ -19,7 +19,9 @@ public class Equipo {
     public Equipo() {
     }
 
-    public Equipo(int idEquipo, int rut_encargado, String marca, String modelo, String descripcion, String estado, int tipoEquipo, Date fecha_ingreso, Date fecha_salida) {
+    public Equipo(int idEquipo, int rut_encargado, String marca, String modelo, 
+            String descripcion, String estado, int tipoEquipo, Date fecha_ingreso, 
+            Date fecha_salida) {
         this.idEquipo = idEquipo;
         this.rut_encargado = rut_encargado;
         this.marca = marca;

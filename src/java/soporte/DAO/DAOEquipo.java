@@ -97,12 +97,16 @@ public class DAOEquipo implements CRUD<Equipo>{
             rs = ps.executeQuery();
             
             while(rs.next()){
-                
+                equipos.add(new Equipo(rs.getInt("idEquipo"), rs.getInt("rut_encargado"), 
+                        rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"), 
+                        rs.getString("estado"), rs.getInt("tipoEquipo"), 
+                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida")));
             }
+            return equipos;
         }catch(SQLException ex){
             Logger.getLogger(DAOEquipo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return equipos;
+        return null;
     }
     
 }
