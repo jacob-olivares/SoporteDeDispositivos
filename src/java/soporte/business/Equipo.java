@@ -13,16 +13,15 @@ import java.util.Date;
  */
 public class Equipo {
     private int idEquipo, rut_encargado, tipoEquipo;
-    private String marca, modelo, descripcion, estado;
+    private String marca, modelo, descripcion, estado, rut_cliente;
     private Date fecha_ingreso, fecha_salida;
 
     public Equipo() {
     }
 
-    public Equipo(int idEquipo, int rut_encargado, String marca, String modelo, 
+    public Equipo(int rut_encargado, String marca, String modelo, 
             String descripcion, String estado, int tipoEquipo, Date fecha_ingreso, 
-            Date fecha_salida) {
-        this.idEquipo = idEquipo;
+            Date fecha_salida, String rut_cliente) {
         this.rut_encargado = rut_encargado;
         this.marca = marca;
         this.modelo = modelo;
@@ -31,6 +30,7 @@ public class Equipo {
         this.tipoEquipo = tipoEquipo;
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_salida = fecha_salida;
+        this.rut_cliente = rut_cliente;
     }
 
 
@@ -105,6 +105,14 @@ public class Equipo {
 
     public void setTipoEquipo(int tipoEquipo) {
         this.tipoEquipo = tipoEquipo;
+    }
+
+    public String getRut_cliente() {
+        return rut_cliente;
+    }
+
+    public void setRut_cliente(String rut_cliente) {
+        this.rut_cliente = rut_cliente;
     }
     
     

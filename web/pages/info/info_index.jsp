@@ -1,6 +1,6 @@
 <%-- 
-    Document   : equipos_index
-    Created on : 23-11-2018, 0:07:23
+    Document   : info_index
+    Created on : 23-11-2018, 13:46:31
     Author     : jhaco
 --%>
 
@@ -11,14 +11,14 @@
         <%@include  file="../../partials/head.jsp" %>
     </head>
     <body>
-        <nav>
-            <%@include  file="../../partials/menu.jsp" %>
-        </nav>
+        <header>
+        <%@include  file="../../partials/menu.jsp" %>
+        </header>
         <main>
-            
+
         </main>
-        <div class="footer">
+        <footer class="fixed-bottom">
             <%@include  file="../../partials/footer.jsp" %>
-        </div>
+        </footer>
     </body>
 </html>
