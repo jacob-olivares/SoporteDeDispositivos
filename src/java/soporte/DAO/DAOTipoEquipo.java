@@ -77,6 +77,23 @@ public class DAOTipoEquipo implements CRUD<TipoEquipo>{
         return false;
     }
 
+    public ArrayList<TipoEquipo> selectTaller() {
+        String query = "SELECT * FROM TIPOEQUIPO WHERE ESTADO LIKE 'EN TALLER';";
+        ArrayList<TipoEquipo> tipoEquipos = new ArrayList<>();
+        try {
+            PreparedStatement ps = objConn.getConn().prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                tipoEquipos.add(new TipoEquipo(rs.getInt("idTipoEquipo"), rs.getString("tipo_equipo")));
+            }
+            return tipoEquipos;
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTipoEquipo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     @Override
     public ArrayList<TipoEquipo> select() {
         String query = "SELECT * FROM TIPOEQUIPO;";

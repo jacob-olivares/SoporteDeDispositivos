@@ -74,7 +74,7 @@
                             Descripcion falla:
                         </td>
                         <td>
-                            <textarea class="form-control" rows="4" id="comment" style="margin-left: 20px;" required></textarea>
+                            <textarea class="form-control" name="descripcion" rows="4" id="comment" style="margin-left: 20px;" required></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -96,24 +96,21 @@
                             Rut cliente
                         </td>
                         <td>
-                            <input type="text" id="rut" name="rut" required oninput="checkRut(this)" placeholder="Ingrese RUT" class="form-control form-control"
+                            <input type="text" id="rut" name="rut_cliente" required oninput="checkRut(this)" placeholder="Ingrese RUT" class="form-control form-control"
                                    style="margin-left: 20px;">
                         </td>
                     </tr>
                 </table>
             </form>
         </main>
-        <% if(request.getAttribute("Ingresado")!= null){ %>
-        <% if(request.getAttribute("Ingresado").equals("true")){ %>
+        <% if(session.getAttribute("Ingresado")!= null){ %>
+        <% if(session.getAttribute("Ingresado").equals("true")){ %>
             <div class="alert alert-success">
                 <strong>Ingresado!</strong> Se ha ingresado el equipo a taller.
             </div>
-        <% }else{ %>
-            <div class="alert alert-danger">
-                <strong>Error!</strong> Equipo no ingresado.
-            </div>
-            <% }
-        }%>
+            <%  }
+            session.setAttribute("Ingresado", null);
+            }%>
         <footer class="fixed-bottom">
             <%@include  file="../../partials/footer.jsp" %>
         </footer>

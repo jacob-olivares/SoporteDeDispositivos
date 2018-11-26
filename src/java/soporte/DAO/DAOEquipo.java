@@ -27,7 +27,7 @@ public class DAOEquipo implements CRUD<Equipo>{
     @Override
     public boolean insert(Equipo x) {
         String query = "INSERT INTO EQUIPO(marca, modelo, tipoEquipo, fecha_ingreso,"
-                + "fecha_salida, descripcion, rut_encargado, estado, rut_cliente) VALUES(?,?,?,?,?,?,?,?);";
+                + "fecha_salida, descripcion, rut_encargado, estado, rut_cliente) VALUES(?,?,?,?,?,?,?,?,?);";
         try{
             PreparedStatement ps = objConn.getConn().prepareStatement(query);
             ps.setString(1, x.getMarca());
@@ -101,6 +101,26 @@ public class DAOEquipo implements CRUD<Equipo>{
             
             while(rs.next()){
                 equipos.add(new Equipo(rs.getInt("rut_encargado"), 
+                        rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"), 
+                        rs.getString("estado"), rs.getInt("tipoEquipo"), 
+                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente")));
+            }
+            return equipos;
+        }catch(SQLException ex){
+            Logger.getLogger(DAOEquipo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Equipo> selectTaller() {
+        String query = "SELECT * FROM EQUIPO;";
+        ArrayList<Equipo> equipos = new ArrayList<>();
+        try{
+            PreparedStatement ps = objConn.getConn().prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                equipos.add(new Equipo(rs.getInt("idEquipo"), rs.getInt("rut_encargado"), 
                         rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"), 
                         rs.getString("estado"), rs.getInt("tipoEquipo"), 
                         rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente")));

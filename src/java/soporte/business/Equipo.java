@@ -32,6 +32,21 @@ public class Equipo {
         this.fecha_salida = fecha_salida;
         this.rut_cliente = rut_cliente;
     }
+    
+    public Equipo(int idEquipo, int rut_encargado, String marca, String modelo, 
+            String descripcion, String estado, int tipoEquipo, Date fecha_ingreso, 
+            Date fecha_salida, String rut_cliente) {
+        this.idEquipo = idEquipo;
+        this.rut_encargado = rut_encargado;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.tipoEquipo = tipoEquipo;
+        this.fecha_ingreso = fecha_ingreso;
+        this.fecha_salida = fecha_salida;
+        this.rut_cliente = rut_cliente;
+    }
 
 
 

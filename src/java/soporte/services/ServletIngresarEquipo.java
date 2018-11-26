@@ -102,11 +102,12 @@ public class ServletIngresarEquipo extends HttpServlet {
             //SE CREA EL EQUIPO
             Equipo e = new Equipo(rut_encargado, marca, modelo, descripcion, "EN TALLER", tipo_dispositivo, fecha_ingreso, fecha_salida, rut_cliente);
             if(dEquipo.insert(e)){
-                request.setAttribute("Ingresado", "true");
-                request.getRequestDispatcher("equipos/ingresar.jsp").forward(request, response);
+                request.getSession().setAttribute("Ingresado", "true");
+                response.sendRedirect("/SoporteDeDispositivos/pages/equipos/ingresar.jsp");
             }else{
-                request.setAttribute("Ingresado", "false");
-                request.getRequestDispatcher("ingresar.jsp").forward(request, response);
+                
+                request.getSession().setAttribute("Ingresado", "false");
+                response.sendRedirect("/SoporteDeDispositivos/pages/equipos/ingresar.jsp");
             }
             
             

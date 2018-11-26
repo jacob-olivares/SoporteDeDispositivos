@@ -8,6 +8,10 @@
         <servlet-name>ServletIngresarEquipo</servlet-name>
         <servlet-class>soporte.services.ServletIngresarEquipo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCargarLista</servlet-name>
+        <servlet-class>soporte.services.ServletCargarLista</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/ServletLogin</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ServletIngresarEquipo</servlet-name>
         <url-pattern>/ServletIngresarEquipo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCargarLista</servlet-name>
+        <url-pattern>/ServletCargarLista</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
