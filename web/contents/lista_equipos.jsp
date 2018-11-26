@@ -8,7 +8,7 @@
         <th>ID</th>
         <th>Marca</th>
         <th>Modelo</th>
-        <th>Tipo de equipo</th>
+        <th style="width: 100px;">Tipo equipo</th>
         <th>Fecha ingreso</th>
         <th>Fecha entrega</th>
         <th>Descripcion</th>
@@ -20,32 +20,30 @@
     <c:forEach var="e" items="${equipos}">
         <tr>
             <td>${e.idEquipo}</td>
-            <td>${e.modelo}</td>
             <td>${e.marca}</td>
-            
+            <td>${e.modelo}</td>
         <c:choose>
             <c:when test="${e.tipoEquipo == 1}">
-                <td>PC</td>
+                <td style="width: 100px;">PC</td>
             </c:when>
             <c:when test="${e.tipoEquipo == 2}">
-                <td>Notebook</td>
+                <td style="width: 100px;">Notebook</td>
             </c:when>
             <c:when test="${e.tipoEquipo == 3}">
-                <td>All In One</td>
+                <td style="width: 100px;">All In One</td>
             </c:when>
             <c:when test="${e.tipoEquipo == 4}">
-                <td>Smartphone<td>
+                <td style="width: 100px;">Celular</td>
             </c:when>
             <c:when test="${e.tipoEquipo == 5}">
-                <td>Netbook</td>
+                <td style="width: 100px;">Netbook</td>
             </c:when>
         </c:choose>
-
-            <td>${e.fecha_ingreso}</td>
-            <td>${e.fecha_salida}</td>
-            <td>${e.descripcion}</td>
+            <td style="width: 150px;">${e.fecha_ingreso}</td>
+            <td style="width: 150px;">${e.fecha_salida}</td>
+            <td style="width: 150px;">${e.descripcion}</td>
             <td>${e.rut_encargado}</td>
-            <td>${e.rut_cliente}</td>
+            <td style="width: 150px;">${e.rut_cliente}</td>
         </tr>
     </c:forEach>
     </tbody>
