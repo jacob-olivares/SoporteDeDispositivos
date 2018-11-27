@@ -4,3 +4,8 @@
     </div>
     <!-- /.container -->
 </footer>
+<!-- Validacion de sesion -->
+<%
+    if(session.getAttribute("Usuario") == null){
+    response.sendRedirect("/SoporteDeDispositivos/pages/login.jsp");
+}%>

@@ -28,6 +28,15 @@ public class Personal {
         this.fecha_contrato = fecha_contrato;
     }
 
+    public Personal(int telefono, String nombre, String ap_pat, String ap_mat, int rut_personal) {
+        this.telefono = telefono;
+        this.nombre = nombre;
+        this.ap_pat = ap_pat;
+        this.ap_mat = ap_mat;
+        this.rut_personal = rut_personal;
+    }
+    
+
     public int getRut_personal() {
         return rut_personal;
     }

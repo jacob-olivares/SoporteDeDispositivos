@@ -17,22 +17,17 @@
                 <p id="profile-name" class="profile-name-card"></p>
                 <form class="form-signin" action="${pageContext.request.contextPath}/ServletLogin" method="POST">
                     <span id="reauth-email" class="reauth-email"></span>
-                    <input type="text" id="inputEmail" class="form-control" placeholder="username" name="username" required autofocus>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-                    <div id="remember" class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+                    <input type="text" id="inputEmail" class="form-control" placeholder="RUT" name="username" required autofocus>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" name="password" required>
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Entrar</button>
                 </form><!-- /form -->
-                <a href="#" class="forgot-password">
-                    Forgot the password?
-                </a>
+                <% if(request.getAttribute("Mensaje") != null){ %>
+                    <h2><%=request.getAttribute("Mensaje")%></h2>
+                <% }
+                   request.setAttribute("Mensaje", null);
+                %>
             </div><!-- /card-container -->
         </div><!-- /container -->
     </body>
-    <% if (request.getAttribute("Mensaje") != null) {%>
-    <h1><%=request.getAttribute("Mensaje")%></h1>
-    <% }%>
+
 </html>

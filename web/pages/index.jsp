@@ -8,6 +8,7 @@
 <%@page import="soporte.business.TipoEquipo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <%@include  file="../partials/head.jsp" %>
@@ -18,6 +19,8 @@
         </nav>
         <main>
             <%
+                // Se crea la sesion para el usuario
+                session.setAttribute("Usuario", request.getAttribute("User"));
                 ArrayList<TipoEquipo> tipos = (ArrayList<TipoEquipo>) request.getAttribute("tipos");
                 session.setAttribute("tiposEquipos", tipos);
                 %>

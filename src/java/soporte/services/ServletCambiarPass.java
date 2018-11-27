@@ -7,22 +7,18 @@ package soporte.services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import soporte.DAO.DAOTipoEquipo;
 import soporte.DAO.DAOUsuario;
-import soporte.business.TipoEquipo;
 import soporte.business.Usuario;
 
 /**
  *
  * @author jhaco
  */
-public class ServletLogin extends HttpServlet {
+public class ServletCambiarPass extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,6 +31,7 @@ public class ServletLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,8 +46,7 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().invalidate();
-        response.sendRedirect("/SoporteDeDispositivos/pages/login.jsp");
+        processRequest(request, response);
     }
 
     /**
@@ -64,24 +60,28 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        DAOUsuario dUsuario = new DAOUsuario();
-        ArrayList<Usuario> usuarios = dUsuario.select();
-        Usuario user;
-
-        for (Usuario u : usuarios) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                user = u;
-                request.setAttribute("User", user);
-                request.getRequestDispatcher("pages/index.jsp").forward(request, response);
-            }
-        }
+        DAOUsuario dUser = new DAOUsuario();
+        String old_pass = request.getParameter("password1");
+        String new_pass = request.getParameter("password2");
+        String r_pass = request.getParameter("password3");
         
-        request.setAttribute("Mensaje", "Credenciales incorrectas");
-        request.getRequestDispatcher("pages/login.jsp").forward(request, response);
-    }
+        Usuario u = (Usuario) request.getSession().getAttribute("Usuario");
+        
+        //Si la contraseña del usuario no coincide con la que viene por parametro
+        if(!u.getPassword().equals(old_pass)){
+            request.getSession().setAttribute("Error", "incorrecta"); // se asigna true a una variable de ServletRequest
 
+        }else if (!new_pass.equals(r_pass)){
+            request.getSession().setAttribute("Error", "no coinciden"); // se asigna true a una variable de ServletRequest
+        }else{
+            request.getSession().setAttribute("Error", null); // se asigna null a una variable de ServletRequest
+        }
+        u.setPassword(new_pass);
+        
+        dUser.update(u);
+        request.getSession().setAttribute("Mensaje1", "true");
+        response.sendRedirect("/SoporteDeDispositivos/pages/micuenta/cambiarContrasena.jsp");
+    }
 
     /**
      * Returns a short description of the servlet.

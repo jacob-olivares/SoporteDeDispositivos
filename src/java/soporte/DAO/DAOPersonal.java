@@ -47,16 +47,15 @@ public class DAOPersonal implements CRUD<Personal> {
 
     @Override
     public boolean update(Personal x) {
-        String query = "UPDATE FROM PERSONAL SET nombre = ?, ap_pat = ?, ap_mat = ?, "
-                + "telefono = ?, fecha_contrato = ? WHERE rut_personal = ?;";
+        String query = "UPDATE PERSONAL SET nombre = ?, ap_pat = ?, ap_mat = ?, "
+                + "telefono = ? WHERE rut_personal = ?;";
         try{
             PreparedStatement ps = objConn.getConn().prepareStatement(query);
             ps.setString(1, x.getNombre());
             ps.setString(2, x.getAp_pat());
             ps.setString(3, x.getAp_mat());
             ps.setInt(4, x.getTelefono());
-            ps.setDate(6, (Date) x.getFecha_contrato());
-            
+            ps.setInt(5, x.getRut_personal());
             if(ps.executeUpdate()> 0){
                 return true;
             }

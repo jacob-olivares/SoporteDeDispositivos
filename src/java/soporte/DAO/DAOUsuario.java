@@ -41,12 +41,11 @@ public class DAOUsuario implements CRUD<Usuario>{
 
     @Override
     public boolean update(Usuario x) {
-        String query = "UPDATE FROM USUARIO SET USERNAME = ?, PASSWORD = ? WHERE IDUSUARIO = ?;";
+        String query = "UPDATE USUARIO SET PASSWORD = ? WHERE IDUSUARIO = ?;";
         try {
             PreparedStatement ps = objConn.getConn().prepareStatement(query);
-            ps.setString(1, x.getUsername());
-            ps.setString(2, x.getPassword());
-            ps.setInt(3, x.getIdUsuario());
+            ps.setString(1, x.getPassword());
+            ps.setInt(2, x.getIdUsuario());
             if (ps.executeUpdate() > 0) {
                 return true;
             }

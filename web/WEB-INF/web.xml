@@ -16,6 +16,14 @@
         <servlet-name>ServletEntregarEquipo</servlet-name>
         <servlet-class>soporte.services.ServletEntregarEquipo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCambiarPass</servlet-name>
+        <servlet-class>soporte.services.ServletCambiarPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletCargarMisDatos</servlet-name>
+        <servlet-class>soporte.services.ServletCargarMisDatos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/ServletLogin</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>ServletEntregarEquipo</servlet-name>
         <url-pattern>/ServletEntregarEquipo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCambiarPass</servlet-name>
+        <url-pattern>/ServletCambiarPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCargarMisDatos</servlet-name>
+        <url-pattern>/ServletCargarMisDatos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

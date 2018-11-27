@@ -8,21 +8,20 @@ package soporte.services;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import soporte.DAO.DAOTipoEquipo;
+import soporte.DAO.DAOPersonal;
 import soporte.DAO.DAOUsuario;
-import soporte.business.TipoEquipo;
+import soporte.business.Personal;
 import soporte.business.Usuario;
 
 /**
  *
  * @author jhaco
  */
-public class ServletLogin extends HttpServlet {
+public class ServletCargarMisDatos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,6 +34,7 @@ public class ServletLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,8 +49,18 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().invalidate();
-        response.sendRedirect("/SoporteDeDispositivos/pages/login.jsp");
+        DAOPersonal dPersonal = new DAOPersonal();
+        Usuario u = (Usuario) request.getSession().getAttribute("Usuario");
+        ArrayList<Personal> personal = dPersonal.select();
+        Personal p = null;
+        for (int i = 0; i < personal.size(); i++) {
+            if(personal.get(i).getRut_personal() == Integer.parseInt(u.getUsername())){
+                p = new Personal(personal.get(i).getRut_personal(), personal.get(i).getTelefono(), 
+                        personal.get(i).getNombre(), personal.get(i).getAp_pat(), 
+                        personal.get(i).getAp_mat(), personal.get(i).getFecha_contrato());
+            }
+        }
+        request.getSession().setAttribute("Personal", p);
     }
 
     /**
@@ -64,24 +74,19 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        DAOUsuario dUsuario = new DAOUsuario();
-        ArrayList<Usuario> usuarios = dUsuario.select();
-        Usuario user;
-
-        for (Usuario u : usuarios) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                user = u;
-                request.setAttribute("User", user);
-                request.getRequestDispatcher("pages/index.jsp").forward(request, response);
-            }
-        }
+        int rut_personal = Integer.parseInt(request.getParameter("rut_personal"));
+        String nombre = request.getParameter("nombre");
+        String ap_pat = request.getParameter("ap_pat");
+        String ap_mat = request.getParameter("ap_mat");
+        int telefono = Integer.parseInt(request.getParameter("telefono"));
         
-        request.setAttribute("Mensaje", "Credenciales incorrectas");
-        request.getRequestDispatcher("pages/login.jsp").forward(request, response);
+        Personal p = new Personal(telefono, nombre, ap_pat, ap_mat, rut_personal);
+        DAOPersonal dPersonal = new DAOPersonal();
+        dPersonal.update(p);
+        request.getSession().setAttribute("Modificar", "true");
+        request.getSession().setAttribute("Personal", p);
+        response.sendRedirect("/SoporteDeDispositivos/pages/micuenta/misdatos.jsp");
     }
-
 
     /**
      * Returns a short description of the servlet.
