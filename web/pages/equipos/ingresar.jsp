@@ -87,8 +87,8 @@
                                 ArrayList<Personal> personal = (ArrayList < Personal >)session.getAttribute("personal");
                                 for(Personal p : personal){ %>
                                 <option value="<%=p.getRut_personal()%>"><%=p.getRut_personal()+" | "+p.getNombre() + " " +p.getAp_pat()%></option>
-                            </select>
                             <% }%>
+                            </select>
                         </td>
                     </tr>
                     <tr>
