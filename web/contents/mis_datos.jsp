@@ -7,14 +7,6 @@
             %>
         <tr>
             <td>
-                Rut personal:
-            </td>
-            <td>
-                <input type="text" class="form-control form-control" name="rut_personal" style="margin-left: 20px;" value="<%=p.getRut_personal()%>" disabled>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 Nombre
             </td>
             <td>

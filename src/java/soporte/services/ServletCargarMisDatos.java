@@ -52,15 +52,15 @@ public class ServletCargarMisDatos extends HttpServlet {
         DAOPersonal dPersonal = new DAOPersonal();
         Usuario u = (Usuario) request.getSession().getAttribute("Usuario");
         ArrayList<Personal> personal = dPersonal.select();
-        Personal p = null;
+        
         for (int i = 0; i < personal.size(); i++) {
             if(personal.get(i).getRut_personal() == Integer.parseInt(u.getUsername())){
-                p = new Personal(personal.get(i).getRut_personal(), personal.get(i).getTelefono(), 
+                Personal p = new Personal(personal.get(i).getRut_personal(), personal.get(i).getTelefono(), 
                         personal.get(i).getNombre(), personal.get(i).getAp_pat(), 
                         personal.get(i).getAp_mat(), personal.get(i).getFecha_contrato());
+                request.getSession().setAttribute("Personal", p);
             }
         }
-        request.getSession().setAttribute("Personal", p);
     }
 
     /**
@@ -74,17 +74,16 @@ public class ServletCargarMisDatos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int rut_personal = Integer.parseInt(request.getParameter("rut_personal"));
+        Usuario u = (Usuario) request.getSession().getAttribute("Usuario");
         String nombre = request.getParameter("nombre");
         String ap_pat = request.getParameter("ap_pat");
         String ap_mat = request.getParameter("ap_mat");
         int telefono = Integer.parseInt(request.getParameter("telefono"));
         
-        Personal p = new Personal(telefono, nombre, ap_pat, ap_mat, rut_personal);
+        Personal p = new Personal(telefono, nombre, ap_pat, ap_mat, Integer.parseInt(u.getUsername()));
         DAOPersonal dPersonal = new DAOPersonal();
         dPersonal.update(p);
         request.getSession().setAttribute("Modificar", "true");
-        request.getSession().setAttribute("Personal", p);
         response.sendRedirect("/SoporteDeDispositivos/pages/micuenta/misdatos.jsp");
     }
 
