@@ -70,17 +70,16 @@ public class ServletCambiarPass extends HttpServlet {
         //Si la contraseña del usuario no coincide con la que viene por parametro
         if(!u.getPassword().equals(old_pass)){
             request.getSession().setAttribute("Error", "incorrecta"); // se asigna true a una variable de ServletRequest
-
+            response.sendRedirect("/SoporteDeDispositivos/pages/micuenta/cambiarContrasena.jsp");
         }else if (!new_pass.equals(r_pass)){
             request.getSession().setAttribute("Error", "no coinciden"); // se asigna true a una variable de ServletRequest
+            response.sendRedirect("/SoporteDeDispositivos/pages/micuenta/cambiarContrasena.jsp");
         }else{
-            request.getSession().setAttribute("Error", null); // se asigna null a una variable de ServletRequest
+            u.setPassword(new_pass);
+            dUser.update(u);
+            request.getSession().setAttribute("Mensaje1", "true");
+            response.sendRedirect("/SoporteDeDispositivos/pages/micuenta/cambiarContrasena.jsp");
         }
-        u.setPassword(new_pass);
-        
-        dUser.update(u);
-        request.getSession().setAttribute("Mensaje1", "true");
-        response.sendRedirect("/SoporteDeDispositivos/pages/micuenta/cambiarContrasena.jsp");
     }
 
     /**

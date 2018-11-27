@@ -31,6 +31,7 @@
            <strong>Error!</strong> Las contraseñas no coinciden.
        </div>
     <% }
+        session.setAttribute("Error", null);
      }   
     %>
 </div>
