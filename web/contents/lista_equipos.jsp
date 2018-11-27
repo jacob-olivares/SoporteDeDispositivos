@@ -1,4 +1,3 @@
-
 <div class="container" style="margin-left: 30px; margin-top: 20px;">
   <h2>Lista de equipos en taller</h2>
   <p>La siguiente tabla contiene los equipos actualmente en taller:</p>            

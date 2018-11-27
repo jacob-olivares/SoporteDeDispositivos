@@ -113,7 +113,7 @@ public class DAOEquipo implements CRUD<Equipo>{
     }
     
     public ArrayList<Equipo> selectTaller() {
-        String query = "SELECT * FROM EQUIPO;";
+        String query = "SELECT * FROM EQUIPO WHERE ESTADO LIKE 'EN TALLER';";
         ArrayList<Equipo> equipos = new ArrayList<>();
         try{
             PreparedStatement ps = objConn.getConn().prepareStatement(query);
@@ -130,6 +130,46 @@ public class DAOEquipo implements CRUD<Equipo>{
             Logger.getLogger(DAOEquipo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public ArrayList<Equipo> selectXRut(String rut_cliente){
+        String query = "SELECT * FROM EQUIPO WHERE RUT_CLIENTE = ? AND ESTADO LIKE 'EN TALLER';";
+        ArrayList<Equipo> equipos = new ArrayList<>();
+        try {
+            PreparedStatement ps = objConn.getConn().prepareStatement(query);
+            ps.setString(1, rut_cliente);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                equipos.add(new Equipo(rs.getInt("idEquipo"), rs.getInt("rut_encargado"),
+                        rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"),
+                        rs.getString("estado"), rs.getInt("tipoEquipo"),
+                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente")));
+            }
+            return equipos;
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOEquipo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public boolean entregarEquipo(int[] equipos, java.util.Date fecha){
+        for (int i = 0; i < equipos.length; i++) {
+            String query = "UPDATE EQUIPO SET ESTADO = ?, FECHA_SALIDA = ? WHERE IDEQUIPO = ?;";
+            try {
+                PreparedStatement ps = objConn.getConn().prepareStatement(query);
+                ps.setString(1, "ENTREGADO");
+                ps.setDate(2, new Date(fecha.getTime()));
+                ps.setInt(3, equipos[i]);
+                
+                if(ps.executeUpdate() > 0){
+                    return true;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOEquipo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
     }
     
 }
