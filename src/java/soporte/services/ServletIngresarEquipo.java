@@ -94,13 +94,14 @@ public class ServletIngresarEquipo extends HttpServlet {
             String descripcion = request.getParameter("descripcion");
             int rut_encargado = Integer.parseInt(request.getParameter("rut_encargado"));
             String rut_cliente = request.getParameter("rut_cliente");
+            int precio = Integer.parseInt(request.getParameter("precio"));
             
             //FORMATEO DE STRINGS A DATE
             Date fecha_ingreso = df.parse(fecha_in);
             Date fecha_salida = df.parse(fecha_out);
             
             //SE CREA EL EQUIPO
-            Equipo e = new Equipo(rut_encargado, marca, modelo, descripcion, "EN TALLER", tipo_dispositivo, fecha_ingreso, fecha_salida, rut_cliente);
+            Equipo e = new Equipo(rut_encargado, marca, modelo, descripcion, "EN TALLER", tipo_dispositivo, fecha_ingreso, fecha_salida, rut_cliente, precio);
             if(dEquipo.insert(e)){
                 request.getSession().setAttribute("Ingresado", "true");
                 response.sendRedirect("/SoporteDeDispositivos/pages/equipos/ingresar.jsp");

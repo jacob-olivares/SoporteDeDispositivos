@@ -27,7 +27,7 @@ public class DAOEquipo implements CRUD<Equipo>{
     @Override
     public boolean insert(Equipo x) {
         String query = "INSERT INTO EQUIPO(marca, modelo, tipoEquipo, fecha_ingreso,"
-                + "fecha_salida, descripcion, rut_encargado, estado, rut_cliente) VALUES(?,?,?,?,?,?,?,?,?);";
+                + "fecha_salida, descripcion, rut_encargado, estado, rut_cliente, precio) VALUES(?,?,?,?,?,?,?,?,?,?);";
         try{
             PreparedStatement ps = objConn.getConn().prepareStatement(query);
             ps.setString(1, x.getMarca());
@@ -39,6 +39,7 @@ public class DAOEquipo implements CRUD<Equipo>{
             ps.setInt(7, x.getRut_encargado());
             ps.setString(8, x.getEstado());
             ps.setString(9, x.getRut_cliente());
+            ps.setInt(10, x.getPrecio());
             
             if(ps.executeUpdate() > 0){
                 return true;
@@ -52,7 +53,7 @@ public class DAOEquipo implements CRUD<Equipo>{
     @Override
     public boolean update(Equipo x) {
         String query = "UPDATE EQUIPO SET marca=?, modelo=?, tipoEquipo=?, fecha_ingreso=?,"
-                + "fecha_salida=?, descripcion=?, rut_encargado=?, estado=?, rut_cliente = ? WHERE idEquipo = ?;";
+                + "fecha_salida=?, descripcion=?, rut_encargado=?, estado=?, rut_cliente = ?, precio = ? WHERE idEquipo = ?;";
         try{
             PreparedStatement ps = objConn.getConn().prepareStatement(query);
             ps.setString(1, x.getMarca());
@@ -64,7 +65,8 @@ public class DAOEquipo implements CRUD<Equipo>{
             ps.setInt(7, x.getRut_encargado());
             ps.setString(8, x.getEstado());
             ps.setString(9, x.getRut_cliente());
-            ps.setInt(10, x.getIdEquipo());
+            ps.setInt(10, x.getPrecio());
+            ps.setInt(11, x.getIdEquipo());
             
             if(ps.executeUpdate() > 0){
                 return true;
@@ -103,7 +105,7 @@ public class DAOEquipo implements CRUD<Equipo>{
                 equipos.add(new Equipo(rs.getInt("rut_encargado"), 
                         rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"), 
                         rs.getString("estado"), rs.getInt("tipoEquipo"), 
-                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente")));
+                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente"), rs.getInt("precio")));
             }
             return equipos;
         }catch(SQLException ex){
@@ -123,7 +125,7 @@ public class DAOEquipo implements CRUD<Equipo>{
                 equipos.add(new Equipo(rs.getInt("idEquipo"), rs.getInt("rut_encargado"), 
                         rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"), 
                         rs.getString("estado"), rs.getInt("tipoEquipo"), 
-                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente")));
+                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente"), rs.getInt("precio")));
             }
             return equipos;
         }catch(SQLException ex){
@@ -144,7 +146,7 @@ public class DAOEquipo implements CRUD<Equipo>{
                 equipos.add(new Equipo(rs.getInt("idEquipo"), rs.getInt("rut_encargado"),
                         rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"),
                         rs.getString("estado"), rs.getInt("tipoEquipo"),
-                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente")));
+                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente"), rs.getInt("precio")));
             }
             return equipos;
         } catch (SQLException ex) {
@@ -153,23 +155,22 @@ public class DAOEquipo implements CRUD<Equipo>{
         return null;
     }
     
-    public boolean entregarEquipo(int[] equipos, java.util.Date fecha){
+    public void entregarEquipo(int equipos[], java.util.Date fecha) {
         for (int i = 0; i < equipos.length; i++) {
             String query = "UPDATE EQUIPO SET ESTADO = ?, FECHA_SALIDA = ? WHERE IDEQUIPO = ?;";
-            try {
-                PreparedStatement ps = objConn.getConn().prepareStatement(query);
-                ps.setString(1, "ENTREGADO");
-                ps.setDate(2, new Date(fecha.getTime()));
-                ps.setInt(3, equipos[i]);
+        try {
+            PreparedStatement ps = objConn.getConn().prepareStatement(query);
+
+            ps.setString(1, "ENTREGADO");
+            ps.setDate(2, new Date(fecha.getTime()));
+            ps.setInt(3, equipos[i]);
+            ps.addBatch(); //Añade una sentencia a la lista de sentencias por lotes.
+            ps.executeBatch(); //Ejecuta la sentencia por lotes.
                 
-                if(ps.executeUpdate() > 0){
-                    return true;
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(DAOEquipo.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOEquipo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        }
     }
     
 }

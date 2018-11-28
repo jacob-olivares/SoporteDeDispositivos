@@ -12,7 +12,7 @@ import java.util.Date;
  * @author jhaco
  */
 public class Equipo {
-    private int idEquipo, rut_encargado, tipoEquipo;
+    private int idEquipo, rut_encargado, tipoEquipo, precio;
     private String marca, modelo, descripcion, estado, rut_cliente;
     private Date fecha_ingreso, fecha_salida;
 
@@ -21,7 +21,7 @@ public class Equipo {
 
     public Equipo(int rut_encargado, String marca, String modelo, 
             String descripcion, String estado, int tipoEquipo, Date fecha_ingreso, 
-            Date fecha_salida, String rut_cliente) {
+            Date fecha_salida, String rut_cliente, int precio) {
         this.rut_encargado = rut_encargado;
         this.marca = marca;
         this.modelo = modelo;
@@ -31,11 +31,12 @@ public class Equipo {
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_salida = fecha_salida;
         this.rut_cliente = rut_cliente;
+        this.precio = precio;
     }
     
     public Equipo(int idEquipo, int rut_encargado, String marca, String modelo, 
             String descripcion, String estado, int tipoEquipo, Date fecha_ingreso, 
-            Date fecha_salida, String rut_cliente) {
+            Date fecha_salida, String rut_cliente, int precio) {
         this.idEquipo = idEquipo;
         this.rut_encargado = rut_encargado;
         this.marca = marca;
@@ -46,6 +47,15 @@ public class Equipo {
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_salida = fecha_salida;
         this.rut_cliente = rut_cliente;
+        this.precio = precio;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 
 

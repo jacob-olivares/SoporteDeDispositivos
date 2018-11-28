@@ -12,6 +12,7 @@
                     <th>Descripcion</th>
                     <th>Encargado</th>
                     <th>Cliente</th>
+                    <th>Precio</th>
                     <th>Entregar</th>
                 </tr>
             </thead>
@@ -43,6 +44,7 @@
                 <td style="width: 150px;">${e.descripcion}</td>
                 <td>${e.rut_encargado}</td>
                 <td style="width: 150px;">${e.rut_cliente}</td>
+                <td style="width: 150px;">${e.precio}</td>
                 <td>
                     <div class="form-check" style="margin-bottom: 30px; margin-left: 40px;">
                         <label class="form-check-label">

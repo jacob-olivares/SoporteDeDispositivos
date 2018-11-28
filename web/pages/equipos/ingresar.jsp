@@ -100,12 +100,21 @@
                                    style="margin-left: 20px;">
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Precio
+                        </td>
+                        <td>
+                            <input type="text" id="rut" name="precio" class="form-control form-control"
+                                   style="margin-left: 20px;" required>
+                        </td>
+                    </tr>
                 </table>
             </form>
         </main>
         <% if(session.getAttribute("Ingresado")!= null){ %>
         <% if(session.getAttribute("Ingresado").equals("true")){ %>
-            <div class="alert alert-success">
+        <div class="alert alert-success" style="height: 40px;">
                 <strong>Ingresado!</strong> Se ha ingresado el equipo a taller.
             </div>
             <%  }
