@@ -40,7 +40,7 @@
                     Telefono
                 </td>
                 <td>
-                    <input type="text" class="form-control form-control" name="telefono" value="<%=p.getTelefono()%>" maxlength="9" style="margin-left: 20px;" required>
+                    <input type="number" class="form-control form-control" name="telefono" value="<%=p.getTelefono()%>" maxlength="9" style="margin-left: 20px;" required>
                 </td>
             </tr>
             <tr>
