@@ -58,13 +58,6 @@
             </c:forEach>
             </tbody>
         </table>
-        <table>
-            <tr>
-                <td>Precio neto: ${total}</td>
-                <td>Iva: </td>
-                <td>Total: </td>
-            </tr>            
-        </table>
         <button type="submit" class="btn btn-primary mb-2" style="margin-left: 20px; width: 200px;" >Entregar Equipo</button>               
     </form>
 </div>
