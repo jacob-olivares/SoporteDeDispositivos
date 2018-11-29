@@ -113,25 +113,6 @@ public class DAOEquipo implements CRUD<Equipo>{
         return null;
     }
     
-    public ArrayList<Equipo> selectTaller() {
-        String query = "SELECT * FROM EQUIPO WHERE ESTADO LIKE 'EN TALLER';";
-        ArrayList<Equipo> equipos = new ArrayList<>();
-        try{
-            PreparedStatement ps = objConn.getConn().prepareStatement(query);
-            rs = ps.executeQuery();
-            
-            while(rs.next()){
-                equipos.add(new Equipo(rs.getInt("idEquipo"), rs.getInt("rut_encargado"), 
-                        rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"), 
-                        rs.getString("estado"), rs.getInt("tipoEquipo"), 
-                        rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente"), rs.getInt("precio")));
-            }
-            return equipos;
-        }catch(SQLException ex){
-            Logger.getLogger(DAOEquipo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
     
     public ArrayList<Equipo> selectXRut(String rut_cliente){
         String query = "SELECT * FROM EQUIPO WHERE RUT_CLIENTE = ? AND ESTADO LIKE 'EN TALLER';";

@@ -48,7 +48,7 @@ public class ServletCargarLista extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         DAOEquipo dEquipo = new DAOEquipo();
-        ArrayList<Equipo> equipos = dEquipo.selectTaller();
+        ArrayList<Equipo> equipos = dEquipo.select();
         request.getSession().setAttribute("equipos", equipos);
     }
 

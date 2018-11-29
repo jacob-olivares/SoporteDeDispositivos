@@ -63,7 +63,7 @@ public class ServletModificarEquipo extends HttpServlet {
                eq = e;
            }
         }
-        request.getSession().setAttribute("Modify", "yes");
+        
         request.getSession().setAttribute("eq", eq);
         response.sendRedirect("/SoporteDeDispositivos/pages/equipos/modificar.jsp");
     }
@@ -100,6 +100,7 @@ public class ServletModificarEquipo extends HttpServlet {
             
             Equipo e = new Equipo(id_equipo, rut_encargado, tipo_equipo, precio, marca, modelo, descripcion, rut_cliente, fecha_ingreso, fecha_salida);
             dEquipo.update(e);
+            request.getSession().setAttribute("Modify", "yes");
             
             response.sendRedirect("/SoporteDeDispositivos/pages/equipos/lista.jsp");
         } catch (ParseException ex) {

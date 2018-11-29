@@ -13,6 +13,7 @@
         <th>Descripcion</th>
         <th>Encargado</th>
         <th>Cliente</th>
+        <th>Estado</th>
         <th></th>
         <th></th>
       </tr>
@@ -45,6 +46,7 @@
             <td style="width: 150px;">${e.descripcion}</td>
             <td>${e.rut_encargado}</td>
             <td style="width: 150px;">${e.rut_cliente}</td>
+            <td>${e.estado}</td>
             <td>
                 <a href="${pageContext.request.contextPath}/ServletModificarEquipo?idEquipo=${e.idEquipo}">
                     <i class="material-icons">create</i>
