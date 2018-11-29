@@ -18,7 +18,25 @@
         <main>
             <%@include file="../../contents/lista_equipos.jsp" %>
         </main>
+
         <footer class="fixed-bottom">
+                    <% if(session.getAttribute("Eliminado")!= null){ %>
+            <%
+                if(session.getAttribute("Eliminado").equals("yes")){ %>
+                <div class="alert alert-success" style="height: 40px;">
+                    <strong>Eliminado!</strong> Se ha eliminado el equipo.
+                </div>
+                <% }
+                    session.setAttribute("Eliminado", null);
+                }%>
+                <% if(session.getAttribute("Modify")!= null){ %>
+                <% if(session.getAttribute("Modify").equals("yes")) { %>
+                <div class="alert alert-success" style="height: 40px;">
+                    <strong>Actualizado!</strong> Se ha modificado el equipo.
+                </div>
+                <% }
+                    session.setAttribute("Modify", null);
+                }%>
             <%@include  file="../../partials/footer.jsp" %>
         </footer>
     </body>
@@ -39,4 +57,9 @@
         "lengthChange": false
     } );
     </script>
+    <script type="text/javascript">
+    $('.confirmation').on('click', function () {
+        return confirm('Confirmar eliminacion de equipo');
+    });
+</script>
 </html>

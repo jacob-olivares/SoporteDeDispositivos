@@ -53,20 +53,19 @@ public class DAOEquipo implements CRUD<Equipo>{
     @Override
     public boolean update(Equipo x) {
         String query = "UPDATE EQUIPO SET marca=?, modelo=?, tipoEquipo=?, fecha_ingreso=?,"
-                + "fecha_salida=?, descripcion=?, rut_encargado=?, estado=?, rut_cliente = ?, precio = ? WHERE idEquipo = ?;";
+                + "fecha_salida=?, descripcion=?, rut_encargado=?, rut_cliente = ?, precio = ? WHERE idEquipo = ?;";
         try{
             PreparedStatement ps = objConn.getConn().prepareStatement(query);
             ps.setString(1, x.getMarca());
             ps.setString(2, x.getModelo());
             ps.setInt(3, x.getTipoEquipo());
-            ps.setDate(4, (Date)x.getFecha_ingreso());
-            ps.setDate(5, (Date)x.getFecha_salida());
+            ps.setDate(4, new Date(x.getFecha_ingreso().getTime()));
+            ps.setDate(5, new Date(x.getFecha_salida().getTime()));
             ps.setString(6, x.getDescripcion());
             ps.setInt(7, x.getRut_encargado());
-            ps.setString(8, x.getEstado());
-            ps.setString(9, x.getRut_cliente());
-            ps.setInt(10, x.getPrecio());
-            ps.setInt(11, x.getIdEquipo());
+            ps.setString(8, x.getRut_cliente());
+            ps.setInt(9, x.getPrecio());
+            ps.setInt(10, x.getIdEquipo());
             
             if(ps.executeUpdate() > 0){
                 return true;
@@ -102,7 +101,7 @@ public class DAOEquipo implements CRUD<Equipo>{
             rs = ps.executeQuery();
             
             while(rs.next()){
-                equipos.add(new Equipo(rs.getInt("rut_encargado"), 
+                equipos.add(new Equipo(rs.getInt("idEquipo"), rs.getInt("rut_encargado"), 
                         rs.getString("marca"), rs.getString("modelo"), rs.getString("descripcion"), 
                         rs.getString("estado"), rs.getInt("tipoEquipo"), 
                         rs.getDate("fecha_ingreso"), rs.getDate("fecha_salida"), rs.getString("rut_cliente"), rs.getInt("precio")));

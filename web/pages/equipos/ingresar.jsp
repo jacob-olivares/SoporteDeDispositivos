@@ -105,7 +105,7 @@
                             Precio
                         </td>
                         <td>
-                            <input type="text" id="rut" name="precio" class="form-control form-control"
+                            <input type="number" id="rut" name="precio" class="form-control form-control"
                                    style="margin-left: 20px;" required>
                         </td>
                     </tr>

@@ -24,6 +24,14 @@
         <servlet-name>ServletCargarMisDatos</servlet-name>
         <servlet-class>soporte.services.ServletCargarMisDatos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletModificarEquipo</servlet-name>
+        <servlet-class>soporte.services.ServletModificarEquipo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletEliminarEquipo</servlet-name>
+        <servlet-class>soporte.services.ServletEliminarEquipo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/ServletLogin</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>ServletCargarMisDatos</servlet-name>
         <url-pattern>/ServletCargarMisDatos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletModificarEquipo</servlet-name>
+        <url-pattern>/ServletModificarEquipo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletEliminarEquipo</servlet-name>
+        <url-pattern>/ServletEliminarEquipo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

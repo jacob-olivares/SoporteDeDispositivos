@@ -13,6 +13,8 @@
         <th>Descripcion</th>
         <th>Encargado</th>
         <th>Cliente</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -43,6 +45,18 @@
             <td style="width: 150px;">${e.descripcion}</td>
             <td>${e.rut_encargado}</td>
             <td style="width: 150px;">${e.rut_cliente}</td>
+            <td>
+                <a href="${pageContext.request.contextPath}/ServletModificarEquipo?idEquipo=${e.idEquipo}">
+                    <i class="material-icons">create</i>
+                </a>
+            </td>
+            <td>
+                <a href="${pageContext.request.contextPath}/ServletEliminarEquipo?idEquipo=${e.idEquipo}" class="confirmation">
+                    <i class="material-icons">
+                        clear
+                    </i>
+                </a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>

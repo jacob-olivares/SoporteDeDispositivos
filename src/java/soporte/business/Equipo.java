@@ -50,6 +50,20 @@ public class Equipo {
         this.precio = precio;
     }
 
+    public Equipo(int idEquipo, int rut_encargado, int tipoEquipo, int precio, String marca, String modelo, String descripcion, String rut_cliente, Date fecha_ingreso, Date fecha_salida) {
+        this.idEquipo = idEquipo;
+        this.rut_encargado = rut_encargado;
+        this.tipoEquipo = tipoEquipo;
+        this.precio = precio;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.descripcion = descripcion;
+        this.rut_cliente = rut_cliente;
+        this.fecha_ingreso = fecha_ingreso;
+        this.fecha_salida = fecha_salida;
+    }
+    
+
     public int getPrecio() {
         return precio;
     }

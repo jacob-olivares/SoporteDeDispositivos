@@ -17,6 +17,7 @@
                 </tr>
             </thead>
             <tbody>
+            <c:set var="total" value="${0}"/>
             <c:forEach var="e" items="${equiposXRut}">
                 <tr>
                     <td>${e.idEquipo}</td>
@@ -45,6 +46,7 @@
                 <td>${e.rut_encargado}</td>
                 <td style="width: 150px;">${e.rut_cliente}</td>
                 <td style="width: 150px;">${e.precio}</td>
+                <c:set var="total" value="${total + e.precio}" />
                 <td>
                     <div class="form-check" style="margin-bottom: 30px; margin-left: 40px;">
                         <label class="form-check-label">
@@ -55,6 +57,13 @@
                 </tr>
             </c:forEach>
             </tbody>
+        </table>
+        <table>
+            <tr>
+                <td>Precio neto: ${total}</td>
+                <td>Iva: </td>
+                <td>Total: </td>
+            </tr>            
         </table>
         <button type="submit" class="btn btn-primary mb-2" style="margin-left: 20px; width: 200px;" >Entregar Equipo</button>               
     </form>
